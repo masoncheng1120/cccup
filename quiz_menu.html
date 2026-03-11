@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Density Portal — Cheng Chung Cup</title>
+  <!-- Import professional and tech-oriented fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Professional Tech Theme Variables */
+    :root {
+      --bg-dark: #070912;
+      --bg-deep: #1D2042;
+      --accent-yellow: #FAD948;
+      --text-light: #f8fafc;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; overflow: hidden; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      /* Animated Mesh Gradient Background */
+      background: radial-gradient(circle at 20% 20%, #1a1e3d 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, #0d1122 0%, transparent 40%),
+                  linear-gradient(135deg, #070912 0%, #1D2042 100%);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Subtle background glow effect */
+    .bg-glow {
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, rgba(250, 217, 72, 0.05) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .menu {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 4rem 2rem;
+      max-width: 800px;
+      width: 92%;
+    }
+
+    .title {
+      margin: 0 0 4rem 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 4px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--accent-yellow);
+      text-shadow: 0 0 20px rgba(250, 217, 72, 0.4), 0 0 40px rgba(250, 217, 72, 0.1);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-container {
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-container:hover {
+      transform: scale(1.05);
+    }
+
+    .btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 240px;
+      height: 200px;
+      border-radius: 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      /* Card Style */
+      background: rgba(250, 217, 72, 0.08);
+      color: var(--accent-yellow);
+      border: 1px solid var(--accent-yellow);
+      box-shadow: inset 0 0 15px rgba(250, 217, 72, 0.1);
+    }
+
+    .btn:hover {
+      background: var(--accent-yellow);
+      color: var(--bg-dark);
+      box-shadow: 0 0 30px rgba(250, 217, 72, 0.4);
+    }
+
+    .btn svg {
+      width: 56px;
+      height: 56px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    .btn-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .btn-outline { 
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding: 0.8rem 1.8rem;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      color: #fff;
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Decorative corner accents for the title */
+    .corner {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent-yellow);
+      opacity: 0.5;
+    }
+    .top-left { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+    .bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+    @media (max-width: 600px) {
+      .btn { width: 100%; height: auto; padding: 2.5rem; flex-direction: row; gap: 1rem; }
+      .buttons { flex-direction: column; width: 100%; }
+      .title { margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  
+  <main class="menu">
+    <div style="position: relative; display: inline-block;">
+      <div class="corner top-left"></div>
+      <div class="corner bottom-right"></div>
+      <h1 class="title" style="padding: 1rem 2.5rem;">Density Portal</h1>
+    </div>
+
+    <div class="buttons" role="navigation" aria-label="Topic Selection">
+      <div class="btn-container">
+        <a class="btn" href="density.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          <span class="btn-label">Calculating Density</span>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <a class="btn-outline" href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Return to Main Menu
+      </a>
+    </div>
+  </main>
+</body>
+</html>

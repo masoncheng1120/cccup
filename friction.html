@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Friction Quiz — Cheng Chung Cup</title>
+  <!-- Imported formal serif font (Merriweather) and clean sans-serif (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --accent-gold: #FAD948;
+      --accent-hover: #fcf1b6;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+      background-attachment: fixed;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .menu {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      padding: 3.5rem 3rem;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .title {
+      margin: 0 0 2.5rem 0;
+      font-family: 'Merriweather', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      color: var(--accent-gold);
+      text-align: center;
+      border-bottom: 2px solid rgba(250, 217, 72, 0.2);
+      padding-bottom: 1.5rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-family: 'Merriweather', serif;
+      color: var(--text-light);
+      font-size: 1.35rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .question-block {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 0 0 1.25rem 0;
+      color: #e2e8f0;
+    }
+
+    .blank-space {
+      display: inline-block;
+      min-width: 80px;
+      border-bottom: 2px solid var(--text-muted);
+      margin: 0 0.25rem;
+    }
+
+    /* Styling for the clickable option buttons */
+    .options-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .option-input {
+      display: none; /* Hide the actual radio button */
+    }
+
+    .option-label {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 0.85rem 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text-muted);
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .option-label:hover {
+      border-color: var(--accent-gold);
+      color: var(--text-light);
+      background: rgba(250, 217, 72, 0.05);
+    }
+
+    /* Selected state */
+    .option-input:checked + .option-label {
+      background-color: var(--accent-gold);
+      color: var(--bg-dark);
+      border-color: var(--accent-gold);
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(250, 217, 72, 0.2);
+    }
+
+    .actions {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      margin-top: 3.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2.5rem;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      color: var(--text-light);
+      border-color: var(--text-muted);
+    }
+
+    #result {
+      margin-top: 2rem;
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      min-height: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .menu { padding: 2rem 1.5rem; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .options-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="menu">
+    <h1 class="title">Friction Lab</h1>
+
+    <form id="quizForm">
+      <section>
+        <h2>True / False Questions</h2>
+        
+        <div class="question-block">
+          <p class="question-text">1. Friction is a force that appears when two surfaces touch and move against each other.</p>
+          <div class="options-grid">
+            <input type="radio" id="tf1-true" name="tf1" value="True" class="option-input">
+            <label for="tf1-true" class="option-label">True</label>
+            
+            <input type="radio" id="tf1-false" name="tf1" value="False" class="option-input">
+            <label for="tf1-false" class="option-label">False</label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <p class="question-text">2. Friction only exists when objects are moving or trying to move.</p>
+          <div class="options-grid">
+            <input type="radio" id="tf2-true" name="tf2" value="True" class="option-input">
+            <label for="tf2-true" class="option-label">True</label>
+            
+            <input type="radio" id="tf2-false" name="tf2" value="False" class="option-input">
+            <label for="tf2-false" class="option-label">False</label>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Fill in the blanks</h2>
+        
+        <div class="question-block">
+          <p class="question-text">1. Friction acts in the <span class="blank-space"></span> direction of motion.</p>
+          <div class="options-grid">
+            <input type="radio" id="f1-same" name="f1" value="same" class="option-input">
+            <label for="f1-same" class="option-label">Same</label>
+            
+            <input type="radio" id="f1-opposite" name="f1" value="opposite" class="option-input">
+            <label for="f1-opposite" class="option-label">Opposite</label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <p class="question-text">2. Friction <span class="blank-space"></span> help the car move.</p>
+          <div class="options-grid">
+            <input type="radio" id="f2-does" name="f2" value="does" class="option-input">
+            <label for="f2-does" class="option-label">Does</label>
+            
+            <input type="radio" id="f2-doesnot" name="f2" value="does not" class="option-input">
+            <label for="f2-doesnot" class="option-label">Does Not</label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <p class="question-text">3. Friction makes moving objects <span class="blank-space"></span>.</p>
+          <div class="options-grid">
+            <input type="radio" id="f3-slow" name="f3" value="slow down" class="option-input">
+            <label for="f3-slow" class="option-label">Slow Down</label>
+            
+            <input type="radio" id="f3-fast" name="f3" value="move faster" class="option-input">
+            <label for="f3-fast" class="option-label">Move Faster</label>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="submitBtn">Submit Assessment</button>
+        <a class="btn btn-outline" href="quiz.html">Return</a>
+      </div>
+
+      <div id="result"></div>
+    </form>
+  </main>
+
+  <!-- External logic file linked exactly as requested -->
+  <script src="friction.js"></script>
+</body>
+</html>

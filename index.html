@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primary Science Menu</title>
+  <!-- Import professional and tech-oriented fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Professional Dark Blue & Yellow Theme */
+    :root {
+      --bg-dark: #0d0f1e;
+      --bg-light: #1D2042;
+      --accent-yellow: #FAD948;
+      --accent-hover: #e5c436;
+      --text-light: #f8fafc;
+      --text-dark: #1D2042;
+      --muted: #a1a9bc;
+      --card-bg: rgba(29, 32, 66, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+    }
+    
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', Inter, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, rgba(13, 15, 30, 0.88), rgba(29, 32, 66, 0.92)), 
+                  url('https://www.cwcc.edu.hk/sites/default/files/styles/slide_show/public/slide_show/3.png?itok=-BAb_tgt') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .menu {
+      text-align: center;
+      padding: 3.5rem 2.5rem;
+      max-width: 720px;
+      width: 92%;
+    }
+    
+    .title {
+      margin: 0 0 1rem 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      letter-spacing: 2px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent-yellow);
+      /* Enhanced the glow effect to make it pop naturally */
+      text-shadow: 0 0 15px rgba(250, 217, 72, 0.5), 0 0 30px rgba(250, 217, 72, 0.2);
+    }
+
+    .school-logo {
+      max-width: 260px;
+      height: auto;
+      margin: 0 auto 0.5rem auto;
+      display: block;
+    }
+    
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-size: 1.15rem;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.5rem;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    
+    .btn svg { display: block; }
+    .btn:focus { outline: 3px solid rgba(250, 217, 72, 0.3); outline-offset: 3px; }
+    .btn:active { transform: translateY(1px); }
+    
+    /* Yellow Primary Button */
+    .btn-primary {
+      background: var(--accent-yellow); 
+      color: var(--text-dark);
+      box-shadow: 0 4px 14px rgba(250, 217, 72, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 20px rgba(250, 217, 72, 0.4);
+      transform: translateY(-2px);
+    }
+    
+    /* Dark Blue/Transparent Secondary Button */
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05); 
+      color: var(--text-light);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--accent-yellow);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    
+    .topic-card:hover {
+      background: rgba(45, 50, 95, 0.8);
+      transform: translateX(4px);
+    }
+    
+    .topic-card:last-child {
+      margin-bottom: 0;
+    }
+    
+    .topic-title {
+      margin: 0 0 1.25rem 0;
+      font-size: 1.35rem;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    @media (max-width: 420px) {
+      .buttons { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .topic-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu">
+    <img src="https://i.ibb.co/KzznyyC5/Untitled-design.png" alt="Untitled-design" class="school-logo">
+    <h1 class="title">Cheng Chung Cup</h1>
+    <p class="subtitle">By Caritas Wu Cheng-chung College</p>
+    
+    <!-- Learning Friction Topic -->
+    <div class="topic-card">
+      <h2 class="topic-title">Learning Friction</h2>
+      <div class="buttons">
+        <a href="video.html" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Video
+        </a>
+        <a href="quiz.html" class="btn btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          Quiz
+        </a>
+        <!-- Competition Guidelines button (placeholder PDF link) -->
+        <a href="../docs/competition_guidelines_friction.pdf" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Open Competition Guidelines for Friction in a new tab">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Competition Guidelines
+        </a>
+      </div>
+    </div>
+
+    <!-- Learning Density Topic -->
+    <div class="topic-card">
+      <h2 class="topic-title">Learning Density</h2>
+      <div class="buttons">
+        <a href="video2.html" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Video
+        </a>
+        <a href="quiz_menu.html" class="btn btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          Quiz
+        </a>
+        <!-- Competition Guidelines button (placeholder PDF link) -->
+        <a href="../docs/competition_guidelines_density.pdf" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Open Competition Guidelines for Density in a new tab">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Competition Guidelines
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

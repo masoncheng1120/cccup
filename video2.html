@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Density Video Lesson — Cheng Chung Cup</title>
+  <!-- Imported formal serif font (Merriweather) and clean sans-serif (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --accent-gold: #FAD948;
+      --accent-hover: #fcf1b6;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+      background-attachment: fixed;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .menu {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      background: var(--bg-card);
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .title {
+      margin: 0 0 1rem 0;
+      font-family: 'Merriweather', serif;
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: var(--accent-gold);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover { 
+      transform: translateY(-2px); 
+    }
+
+    .btn-youtube {
+      background: #ef4444; 
+      color: white;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-youtube:hover {
+      background: #dc2626;
+    }
+
+    .btn-outline { 
+      background: transparent; 
+      color: var(--text-muted); 
+      border: 1px solid var(--border-color); 
+      font-size: 1rem;
+      padding: 0.9rem 1.5rem;
+    }
+
+    .btn-outline:hover {
+      color: var(--text-light);
+      border-color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .video-container { 
+      margin: 2.5rem auto; 
+      text-align: center; 
+    }
+
+    .nav-container { 
+      display: flex; 
+      gap: 1rem; 
+      justify-content: center; 
+      margin-top: 3.5rem; 
+    }
+  </style>
+</head>
+<body>
+  <main class="menu">
+    <h1 class="title">Density Video Lesson</h1>
+    <p class="subtitle">Watch our curated YouTube lesson to strengthen your understanding of density.</p>
+
+    <div class="video-container">
+      <a href="https://youtu.be/YQR4vqlbxWw" target="_blank" class="btn btn-youtube">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"></polygon>
+        </svg>
+        Watch on YouTube
+      </a>
+    </div>
+
+    <div class="nav-container">
+      <a class="btn btn-outline" href="index.html">Back to Home</a>
+    </div>
+  </main>
+</body>
+</html>

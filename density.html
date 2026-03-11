@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculating Density Quiz — Cheng Chung Cup</title>
+  <!-- Imported formal serif font (Merriweather) and clean sans-serif (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --accent-gold: #FAD948;
+      --accent-hover: #fcf1b6;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      
+      /* Status Colors adapted for dark mode */
+      --danger: #f87171;
+      --danger-bg: rgba(239, 68, 68, 0.1);
+      --danger-border: rgba(239, 68, 68, 0.3);
+      --success: #34d399;
+      --success-bg: rgba(16, 185, 129, 0.1);
+      --success-border: rgba(16, 185, 129, 0.3);
+    }
+    
+    * { box-sizing: border-box; }
+    
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+      background-attachment: fixed;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .app-container {
+      display: flex;
+      max-width: 900px;
+      width: 100%;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    @media (min-width: 640px) {
+      .app-container { flex-direction: row; }
+    }
+
+    /* Left Panel: Visuals & Formula */
+    .panel-left {
+      flex: 1;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    @media (min-width: 640px) {
+      .panel-left {
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+      }
+    }
+
+    .formula-box {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px dashed var(--accent-gold);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+    .formula-box h3 { 
+      margin: 0 0 0.75rem 0; 
+      color: var(--accent-gold); 
+      font-family: 'Merriweather', serif;
+      font-size: 1.1rem; 
+    }
+    .formula-box p { 
+      margin: 0; 
+      font-size: 1.25rem; 
+      font-weight: bold; 
+      color: var(--text-light); 
+    }
+    .formula-box small { 
+      color: var(--text-muted); 
+      font-size: 0.9rem; 
+      display: block; 
+      margin-top: 0.75rem; 
+    }
+
+    /* Right Panel: Quiz Area */
+    .panel-right {
+      flex: 1.2;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-header h2 { 
+      margin: 0; 
+      font-size: 1.5rem; 
+      font-family: 'Merriweather', serif;
+      color: var(--text-light);
+    }
+    .progress { 
+      color: var(--accent-gold); 
+      font-weight: 600; 
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      min-height: 80px;
+      color: #e2e8f0;
+    }
+    
+    .question-text b {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="number"], select {
+      padding: 0.85rem;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      color: var(--text-light);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    
+    select option {
+      background: var(--bg-card);
+      color: var(--text-light);
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 2px rgba(250, 217, 72, 0.2);
+    }
+
+    input[type="number"] { flex: 2; }
+    select { flex: 1; cursor: pointer; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.5rem;
+      border: 0;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    
+    .btn-primary { 
+      background: var(--accent-gold); 
+      color: var(--bg-dark); 
+    }
+    
+    .btn-primary:hover { 
+      background: var(--accent-hover); 
+      transform: translateY(-2px); 
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      color: var(--text-light);
+      border-color: var(--text-muted);
+    }
+    
+    .feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+      line-height: 1.5;
+    }
+    .feedback b { font-weight: 700; }
+    .feedback.success { 
+      display: block; 
+      background: var(--success-bg); 
+      color: var(--success); 
+      border: 1px solid var(--success-border);
+    }
+    .feedback.error { 
+      display: block; 
+      background: var(--danger-bg); 
+      color: var(--danger); 
+      border: 1px solid var(--danger-border);
+    }
+
+    /* Results Screen */
+    #results-screen { display: none; text-align: center; }
+    
+    #results-screen h2 {
+      font-family: 'Merriweather', serif;
+      margin-bottom: 2rem;
+    }
+    
+    .grade-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 10px 20px rgba(250, 217, 72, 0.15);
+      border: 4px solid var(--bg-card);
+      outline: 2px dashed var(--accent-gold);
+      outline-offset: 4px;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Left Panel: Reference & Visuals -->
+    <div class="panel-left">
+      <div class="formula-box">
+        <h3>Density Formula</h3>
+        <p>Density = <span style="display:inline-block; vertical-align:middle; text-align:center;">
+            <span style="border-bottom:2px solid var(--text-muted); display:block; padding-bottom: 2px; margin-bottom: 2px;">Mass</span>
+            Volume
+          </span>
+        </p>
+        <small>d = m / v</small>
+      </div>
+    </div>
+
+    <!-- Right Panel: Quiz Logic -->
+    <div class="panel-right">
+      
+      <!-- Active Quiz Section -->
+      <div id="quiz-screen">
+        <div class="quiz-header">
+          <h2>Density Quiz</h2>
+          <span class="progress" id="progress-text">1 / 5</span>
+        </div>
+
+        <div class="question-text" id="question-text">
+          Loading question...
+        </div>
+
+        <div class="input-group">
+          <input type="number" id="answer-input" placeholder="Enter number..." step="0.1">
+          <select id="unit-input">
+            <option value="" disabled selected>Unit</option>
+            <option value="g">g (Mass)</option>
+            <option value="cm³">cm³ (Volume)</option>
+            <option value="g/cm³">g/cm³ (Density)</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+        <button class="btn btn-primary hidden" id="next-btn" onclick="nextQuestion()">Next Question</button>
+
+        <div id="feedback-msg" class="feedback"></div>
+      </div>
+
+      <!-- Results Section -->
+      <div id="results-screen">
+        <h2>Quiz Complete!</h2>
+        <div class="grade-circle" id="final-score">5/5</div>
+        <p style="margin-bottom: 2.5rem; color: var(--text-muted); font-size: 1.1rem;" id="grade-message">Great job!</p>
+        <div style="display: flex; gap: 1rem; flex-direction: column;">
+          <button class="btn btn-primary" onclick="startQuiz()">Retry Quiz</button>
+          <button class="btn btn-outline" onclick="window.location.href='quiz_menu.html'">Back to Menu</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_QUESTIONS = 5;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let currentProblem = {};
+
+    function generateProblem() {
+      // Generate volume: 2 to 20 cm³ (whole numbers for simplicity)
+      let v = Math.floor(Math.random() * 19) + 2; 
+      // Generate density: 0.5 to 10.0 g/cm³ (1 decimal)
+      let d = parseFloat((Math.random() * 9.5 + 0.5).toFixed(1));
+      // Calculate mass: v * d (will automatically have max 1 decimal)
+      let m = parseFloat((v * d).toFixed(1));
+
+      // Decide what to solve for (0: Density, 1: Mass, 2: Volume)
+      const type = Math.floor(Math.random() * 3);
+      
+      let question = "";
+      let answerVal = 0;
+      let answerUnit = "";
+      let explanation = "";
+
+      if (type === 0) {
+        question = `An irregular object has a mass of <b>${m} g</b> and displaces a volume of <b>${v} cm³</b>. <br><br>What is its density?`;
+        answerVal = d;
+        answerUnit = "g/cm³";
+        explanation = `Density = Mass ÷ Volume (${m} ÷ ${v} = ${d})`;
+      } else if (type === 1) {
+        question = `An object has a density of <b>${d} g/cm³</b> and a volume of <b>${v} cm³</b>. <br><br>What is its mass?`;
+        answerVal = m;
+        answerUnit = "g";
+        explanation = `Mass = Density × Volume (${d} × ${v} = ${m})`;
+      } else {
+        question = `An object has a mass of <b>${m} g</b> and a density of <b>${d} g/cm³</b>. <br><br>What is its volume?`;
+        answerVal = v;
+        answerUnit = "cm³";
+        explanation = `Volume = Mass ÷ Density (${m} ÷ ${d} = ${v})`;
+      }
+
+      return { question, answerVal, answerUnit, explanation };
+    }
+
+    function loadQuestion() {
+      currentProblem = generateProblem();
+      
+      // Update UI
+      document.getElementById('question-text').innerHTML = currentProblem.question;
+      document.getElementById('progress-text').innerText = `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
+      
+      // Reset inputs and feedback
+      const answerInput = document.getElementById('answer-input');
+      const unitInput = document.getElementById('unit-input');
+      answerInput.value = "";
+      answerInput.disabled = false;
+      unitInput.value = "";
+      unitInput.disabled = false;
+      
+      const feedbackEl = document.getElementById('feedback-msg');
+      feedbackEl.className = "feedback";
+      feedbackEl.style.display = "none"; // Hide initially
+      
+      // Toggle buttons
+      document.getElementById('submit-btn').classList.remove('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+    }
+
+    function checkAnswer() {
+      const answerInput = document.getElementById('answer-input');
+      const unitInput = document.getElementById('unit-input');
+      const userVal = parseFloat(answerInput.value);
+      const userUnit = unitInput.value;
+      const feedbackEl = document.getElementById('feedback-msg');
+
+      // Force the feedback element to display
+      feedbackEl.style.display = "block";
+
+      if (isNaN(userVal) || userUnit === "") {
+        feedbackEl.innerText = "Please enter a number and select a unit.";
+        feedbackEl.className = "feedback error";
+        return;
+      }
+      
+      // Lock inputs after submission to prevent changes while viewing feedback
+      answerInput.disabled = true;
+      unitInput.disabled = true;
+
+      // Check if value matches (allow slight float precision tolerance)
+      const isValCorrect = Math.abs(userVal - currentProblem.answerVal) < 0.05;
+      const isUnitCorrect = userUnit === currentProblem.answerUnit;
+
+      // Provide the step-by-step breakdown
+      const explanationHtml = `<br><span style="font-size: 0.95rem; opacity: 0.9; display: block; margin-top: 0.75rem;">Calculation: ${currentProblem.explanation}</span>`;
+
+      if (isValCorrect && isUnitCorrect) {
+        feedbackEl.innerHTML = `Correct! Great job.${explanationHtml}`;
+        feedbackEl.className = "feedback success";
+        score++;
+      } else if (!isValCorrect && isUnitCorrect) {
+        feedbackEl.innerHTML = `Incorrect calculation. <br>The correct answer was <b>${currentProblem.answerVal} ${currentProblem.answerUnit}</b>.${explanationHtml}`;
+        feedbackEl.className = "feedback error";
+      } else if (isValCorrect && !isUnitCorrect) {
+        feedbackEl.innerHTML = `Right number, wrong unit! <br>The correct answer was <b>${currentProblem.answerVal} ${currentProblem.answerUnit}</b>.${explanationHtml}`;
+        feedbackEl.className = "feedback error";
+      } else {
+        feedbackEl.innerHTML = `Incorrect. <br>The correct answer was <b>${currentProblem.answerVal} ${currentProblem.answerUnit}</b>.${explanationHtml}`;
+        feedbackEl.className = "feedback error";
+      }
+
+      // Hide submit and show next button to control flow
+      document.getElementById('submit-btn').classList.add('hidden');
+      document.getElementById('next-btn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < TOTAL_QUESTIONS) {
+        loadQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('quiz-screen').style.display = "none";
+      document.getElementById('results-screen').style.display = "block";
+      
+      document.getElementById('final-score').innerText = `${score}/${TOTAL_QUESTIONS}`;
+      
+      let msg = "";
+      if (score === 5) msg = "Perfect score! You are a density master!";
+      else if (score >= 3) msg = "Good job! Keep practicing to get a perfect score.";
+      else msg = "You might need to review the density formula and try again!";
+      
+      document.getElementById('grade-message').innerText = msg;
+    }
+
+    function startQuiz() {
+      score = 0;
+      currentQuestionIndex = 0;
+      document.getElementById('quiz-screen').style.display = "block";
+      document.getElementById('results-screen').style.display = "none";
+      loadQuestion();
+    }
+
+    // Initialize the quiz on page load
+    window.onload = startQuiz;
+
+  </script>
+</body>
+</html>
